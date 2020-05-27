@@ -4,20 +4,33 @@ import random
 
 from bullet import Bullet
 from drone import Drone
+def bullet_collision(bullets, drones, settings, points):
+    for bullet in bullets:
+        bullet.collision(drones, settings, points)
+
+def update_drones(drones, settings):
+    for drone in drones:
+        drone.update(settings)
+        drone.blitme()
+
 def make_drones(settings, drones, screen):
     for drone in drones:
-        if drone.rect.centery >= 100 and len(drones) < 2:
+        if drones[-1].rect.centery >= 150 or len(drones) == 1:
             create_drone(settings, screen, drones)
-def remove_and_speedup_drone(settings, screen, drones):
+def remove_and_speedup_drone(settings, screen, drones, lives):
     for drone in drones:
         if drone.y >= settings.screen_h:
+            lives -= 1
+            if lives == 0:
+                sys.exit()
             drones.remove(drone)
             settings.drone_speed += settings.speed_up
             settings.drone_s_speed += settings.speed_up
 
+
 def create_drone(settings, screen, drones):
     drone = Drone(settings, screen)
-    drones.add(drone)
+    drones.append(drone)
 
 def fire_bullets(settings, screen, car, bullets):
     for bullet in bullets.copy():
@@ -76,11 +89,13 @@ def check_events(settings, screen ,car , bullets):
         elif event.type == pygame.KEYUP:
             keyup(event, settings, screen, car, bullets)
 
-def screen_update(d_settings, screen, car, line, bullets, drones):
+def screen_update(d_settings, screen, car, line, bullets, drones, points, lives):
     screen.fill(d_settings.bg_colour)
     car.draw()
     line.draw_line()
+    bullet_collision(bullets, drones, d_settings, points)
+    update_drones(drones, d_settings)
+    remove_and_speedup_drone(d_settings, screen, drones, lives)
     #draw all the bullets on the screen
     draw_bullets(bullets)
-    drones.draw(screen)
     pygame.display.flip()

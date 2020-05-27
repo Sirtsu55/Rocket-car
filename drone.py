@@ -1,10 +1,9 @@
 import pygame
 from pygame.sprite import Sprite
 import random
-class Drone(Sprite):
+class Drone():
     def __init__(self, settings, screen):
         '''make a drone and then spawn it at the top'''
-        super().__init__()
         self.screen =  screen
         self.settings = settings
         #load the drone

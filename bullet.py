@@ -20,3 +20,10 @@ class Bullet(Sprite):
             self.recty = self.y
     def draw_bullet(self):
         pygame.draw.rect(self.screen, self.colour, self.rect)
+    def collision(self, drones, settings, points):
+        for drone in drones:
+            if self.rect.colliderect(drone):
+                settings.drone_speed += settings.speed_up
+                settings.drone_s_speed += settings.speed_up
+                points += 1
+                drones.remove(drone)
