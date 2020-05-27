@@ -1,5 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
+import random
 class Drone(Sprite):
     def __init__(self, settings, screen):
         '''make a drone and then spawn it at the top'''
@@ -11,8 +12,8 @@ class Drone(Sprite):
         self.rect = self.image.get_rect()
         self.screen_rect = self.screen.get_rect()
 
-        self.rect.y = self.screen_rect.top
-        self.rect.x = self.rect.width
+        self.rect.centery = self.screen_rect.top
+        self.rect.centerx = random.randint(0, self.settings.screen_w)
 
         self.y = float(self.rect.centery)
         self.x = float(self.rect.centerx)
