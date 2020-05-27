@@ -6,34 +6,29 @@ from bullet import Bullet
 from drone import Drone
 
 def speed_up(settings, drones, screen):
+    drone_num = get_number_drones(settings, screen)
     if len(drones) == 0:
-        create_fleet(settings, screen, drones)
+        for i in range(0, drone_num):
+            create_drone(settings, screen, drones)
         settings.drone_speed += settings.speed_up
         settings.drone_s_speed += settings.speed_up
-
 def remove_drone(settings, screen, drones):
     for drone in drones:
         if drone.y >= settings.screen_h:
             drones.remove(drone)
-def get_number_drones(settings, drone_width):
+def get_number_drones(settings,screen):
     '''how many drones fit on the screen'''
+    drone_width = Drone(settings, screen).rect.width
     available_space_x = settings.screen_w
     number_drones_x = int(available_space_x / (2 * drone_width))
     number_drones_x = random.randint(4, number_drones_x)
+    print(number_drones_x)
     return number_drones_x
 
-def create_drone(settings, screen, drones, drone_num):
-    drone = Drone(settings, screen)
-    drone_width = drone.rect.width
-    drone.x = drone_width + 2 * drone_width * drone_num
-    drone.rect.x = drone.x
-    drones.add(drone)
 
-def create_fleet(settings, screen, drones):
+def create_drone(settings, screen, drones):
     drone = Drone(settings, screen)
-    number_drones_x = get_number_drones(settings, drone.rect.width)
-    for drone_num in range(number_drones_x):
-        create_drone(settings, screen, drones, drone_num)
+    drones.add(drone)
 
 def fire_bullets(settings, screen, car, bullets):
     for bullet in bullets.copy():

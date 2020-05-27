@@ -6,7 +6,7 @@ from line import Line
 from pygame.sprite import Group
 
 def run_game():
-
+    
     d_settings = Settings()
     screen = pygame.display.set_mode((d_settings.screen_w, d_settings.screen_h))
     screen.fill(d_settings.bg_colour)

@@ -11,7 +11,6 @@ class Drone(Sprite):
         self.image = pygame.image.load('C:\pyhton\img\drone.png')
         self.rect = self.image.get_rect()
         self.screen_rect = self.screen.get_rect()
-
         self.rect.centery = self.screen_rect.top
         self.rect.centerx = random.randint(0, self.settings.screen_w)
 
@@ -21,7 +20,7 @@ class Drone(Sprite):
         if self.y <= settings.screen_h:
                 self.y += +settings.drone_speed
         #MAKE THE DRONE BOUNCE AND GO SIDEWAYS
-        if self.x <= settings.screen_w:
+        if self.x <= settings.screen_w :
             self.x += settings.drone_s_speed
         if self.x >=settings.screen_w:
             settings.drone_s_speed = -settings.drone_s_speed
