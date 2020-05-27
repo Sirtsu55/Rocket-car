@@ -6,7 +6,7 @@ class Settings():
         self.screen_h = 600   #screen height
         self.bg_colour = (60,60,60)
         self.speed = 1.5
-        self.b_speed = 1.5
+        self.b_speed = 3
         self.bullet_w = 3
         self.bullet_h = 10
         self.bullet_colour = 255, 0, 0

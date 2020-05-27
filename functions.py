@@ -4,27 +4,16 @@ import random
 
 from bullet import Bullet
 from drone import Drone
-
-def speed_up(settings, drones, screen):
-    drone_num = get_number_drones(settings, screen)
-    if len(drones) == 0:
-        for i in range(0, drone_num):
+def make_drones(settings, drones, screen):
+    for drone in drones:
+        if drone.rect.centery >= 100 and len(drones) < 2:
             create_drone(settings, screen, drones)
-        settings.drone_speed += settings.speed_up
-        settings.drone_s_speed += settings.speed_up
-def remove_drone(settings, screen, drones):
+def remove_and_speedup_drone(settings, screen, drones):
     for drone in drones:
         if drone.y >= settings.screen_h:
             drones.remove(drone)
-def get_number_drones(settings,screen):
-    '''how many drones fit on the screen'''
-    drone_width = Drone(settings, screen).rect.width
-    available_space_x = settings.screen_w
-    number_drones_x = int(available_space_x / (2 * drone_width))
-    number_drones_x = random.randint(4, number_drones_x)
-    print(number_drones_x)
-    return number_drones_x
-
+            settings.drone_speed += settings.speed_up
+            settings.drone_s_speed += settings.speed_up
 
 def create_drone(settings, screen, drones):
     drone = Drone(settings, screen)
