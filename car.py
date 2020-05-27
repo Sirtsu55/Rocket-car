@@ -1,4 +1,5 @@
 import pygame
+from stats import Stats
 class Car():
     def __init__(self, settings, screen):
         '''Car class and its start'''
@@ -42,3 +43,13 @@ class Car():
     def draw(self):
         """Draw the ship at its current location."""
         self.screen.blit(self.image, self.car_rect)
+
+
+    def collision_car(self, drones, bullets):
+        stats = Stats(self.settings, drones, bullets)
+        for drone in drones:
+            if self.car_rect.colliderect(drone):
+                stats.lives -= 1
+                drones.remove(drone)
+            if stats.lives == 0:
+                stats.reset()
