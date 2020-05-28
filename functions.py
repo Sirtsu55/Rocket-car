@@ -80,7 +80,7 @@ def keydown(event, settings, screen ,car,car2, bullets): #keydown events
             car2.moving_up = True
         elif event.key == pygame.K_s:
             car2.moving_down = True
-        elif event.key == pygame.K_SPACE:
+        elif event.key == pygame.K_LALT:
             #make a new bullet and add it into the bullets Group
             make_bullets(settings, screen, car2, bullets)
 
