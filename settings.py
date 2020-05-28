@@ -12,5 +12,8 @@ class Settings():
         self.bullet_colour = 255, 0, 0
         self.max_bullets = 2
         self.drone_speed = 0.3
-        self.drone_s_speed = 0.1
+        self.drone_s_speed = 1
         self.speed_up = 0.01
+        self.lives = 3
+        self.points = 0
+        self.sleep_time = 0.3

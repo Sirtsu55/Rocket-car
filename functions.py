@@ -4,9 +4,7 @@ import random
 
 from bullet import Bullet
 from drone import Drone
-from stats import Stats
 from car import Car
-
 
 
 
@@ -32,6 +30,7 @@ def remove_and_speedup_drone(settings, screen, drones):
             drones.remove(drone)
             settings.drone_speed += settings.speed_up
             settings.drone_s_speed += settings.speed_up
+            settings.lives -= 1
 
 
 def create_drone(settings, screen, drones):
@@ -58,7 +57,7 @@ def quit(event):
         if event.key == pygame.K_q:
             sys.exit()
 
-def keydown(event, settings, screen ,car, bullets): #keydown events
+def keydown(event, settings, screen ,car,car2, bullets): #keydown events
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_RIGHT:
             car.moving_right = True
@@ -72,9 +71,22 @@ def keydown(event, settings, screen ,car, bullets): #keydown events
             #make a new bullet and add it into the bullets Group
             make_bullets(settings, screen, car, bullets)
 
+        if event.key == pygame.K_d:
+            car2.moving_right = True
+
+        elif event.key == pygame.K_a:
+            car2.moving_left = True
+        elif event.key == pygame.K_w:
+            car2.moving_up = True
+        elif event.key == pygame.K_s:
+            car2.moving_down = True
+        elif event.key == pygame.K_SPACE:
+            #make a new bullet and add it into the bullets Group
+            make_bullets(settings, screen, car2, bullets)
 
 
-def keyup(event, settings, screen, car, bullets): #key up events
+
+def keyup(event, settings, screen, car, car2, bullets): #key up events
     if event.type == pygame.KEYUP:
         if event.key == pygame.K_RIGHT:
             car.moving_right = False
@@ -86,18 +98,29 @@ def keyup(event, settings, screen, car, bullets): #key up events
         elif event.key == pygame.K_DOWN:
             car.moving_down = False
 
+        if event.key == pygame.K_d:
+            car2.moving_right = False
 
-def check_events(settings, screen ,car , bullets):
+        elif event.key == pygame.K_a:
+            car2.moving_left = False
+        elif event.key == pygame.K_w:
+            car2.moving_up = False
+        elif event.key == pygame.K_s:
+            car2.moving_down = False
+
+
+def check_events(settings, screen ,car, car2 , bullets):
     for event in pygame.event.get():
         quit(event)
         if event.type == pygame.KEYDOWN:
-            keydown(event, settings, screen, car, bullets)
+            keydown(event, settings, screen, car, car2, bullets)
         elif event.type == pygame.KEYUP:
-            keyup(event, settings, screen, car, bullets)
+            keyup(event, settings, screen, car, car2, bullets)
 
-def screen_update(d_settings, screen, car, line, bullets, drones):
+def screen_update(d_settings, screen, car, car2, line, bullets, drones):
     screen.fill(d_settings.bg_colour)
     car.draw()
+    car2.draw()
     line.draw_line()
     update_drones(drones, d_settings)
     remove_and_speedup_drone(d_settings, screen, drones)

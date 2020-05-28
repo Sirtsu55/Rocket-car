@@ -27,5 +27,6 @@ class Bullet(Sprite):
             if self.rect.colliderect(drone):
                 settings.drone_speed += settings.speed_up
                 settings.drone_s_speed += settings.speed_up
-                stats.points += 10
+                stats.settings.points += 10
+                settings.speed += 0.05
                 drones.remove(drone)

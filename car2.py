@@ -3,7 +3,7 @@ import time
 
 
 from stats import Stats
-class Car():
+class Car2():
     def __init__(self, settings, screen):
         '''Car class and its start'''
         self.screen = screen
