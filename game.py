@@ -23,9 +23,11 @@ def run_game():
     #making a Car
     pygame.display.set_caption('Rocket Car')
     while True:
-        f.check_events(d_settings, screen, car,car2, bullets)
+        f.check_events(d_settings, screen, car,car2, bullets, stats)
         if stats.active:
             f.make_drones(d_settings, drones, screen)
+            if stats.two_player:
+                f.collision(bullets, drones, d_settings, car2)
             f.collision(bullets, drones, d_settings, car)
             car.update()
             car2.update()
@@ -33,6 +35,6 @@ def run_game():
             stats.reset()
             # delete the old bullets
             f.fire_bullets(d_settings, screen,car, bullets)
-            f.screen_update(d_settings, screen, car,car2,  line, bullets, drones)
+            f.screen_update(d_settings, screen, car,car2,  line, bullets, drones, stats)
             print(d_settings.points, d_settings.lives)
 run_game()

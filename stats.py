@@ -7,6 +7,7 @@ class Stats():
         self.drones = drones
         self.settings = settings
         self.active = True
+        self.two_player = False
     def reset(self):
         if self.settings.lives == 0:
             sys.exit()
