@@ -37,4 +37,5 @@ def level_up(settings):
     settings.speed += settings.speed_up
     settings.points = int(settings.points)
     if settings.points in settings.level_up:
+        settings.lives += 1
         settings.points_earn *= settings.level_up_scale

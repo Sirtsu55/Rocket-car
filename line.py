@@ -5,7 +5,7 @@ class Line():
         '''a class for line'''
         self.screen = screen
 
-        self.image = pygame.image.load('C:\pyhton\img\line.png')
+        self.image = pygame.image.load('img\line.png')
         self.rect = self.image.get_rect()
         self.screen_rect = self.screen.get_rect()
 

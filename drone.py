@@ -7,7 +7,7 @@ class Drone():
         self.screen =  screen
         self.settings = settings
         #load the drone
-        self.image = pygame.image.load('C:\pyhton\img\drone.png')
+        self.image = pygame.image.load('img\drone.png')
         self.rect = self.image.get_rect()
         self.screen_rect = self.screen.get_rect()
         self.rect.centery = self.screen_rect.top

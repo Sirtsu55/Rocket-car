@@ -9,7 +9,7 @@ class Car2():
         self.screen = screen
         self.settings = settings
         #load the car file
-        self.image = pygame.image.load('C:\pyhton\img\car.png')
+        self.image = pygame.image.load('img\car.png')
         self.car_rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 

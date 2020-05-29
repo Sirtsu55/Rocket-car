@@ -18,5 +18,5 @@ class Settings():
         self.points = 0
         self.sleep_time = 0.3
         self.points_earn = 1000
-        self.level_up = [i * (self.points_earn * 10) for i in range(1,11)]
         self.level_up_scale = 1.5
+        self.level_up = [i * (self.points_earn * 10 * self.level_up_scale) for i in range(1,11)]
