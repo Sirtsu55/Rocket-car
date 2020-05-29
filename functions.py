@@ -21,7 +21,7 @@ def update_drones(drones, settings):
 
 def make_drones(settings, drones, screen):
     for drone in drones:
-        if drones[-1].rect.centery >= 150 or len(drones) == 1:
+        if drones[-1].rect.centery >= 200 :
             create_drone(settings, screen, drones)
 def remove_and_speedup_drone(settings, screen, drones):
     for drone in drones:
