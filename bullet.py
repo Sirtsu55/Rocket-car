@@ -1,6 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 from stats import Stats
+
 class Bullet(Sprite):
     def __init__(self, settings, screen, car):
         '''a bullet that is fired from the car'''
@@ -21,12 +22,19 @@ class Bullet(Sprite):
             self.recty = self.y
     def draw_bullet(self):
         pygame.draw.rect(self.screen, self.colour, self.rect)
+
+
     def collision_bullet(self, drones, settings, bullets):
         stats = Stats(settings, drones, bullets)
         for drone in drones:
             if self.rect.colliderect(drone):
-                settings.drone_speed += settings.speed_up
-                settings.drone_s_speed += settings.speed_up
-                stats.settings.points += 10
-                settings.speed += 0.05
+                level_up(settings)
                 drones.remove(drone)
+def level_up(settings):
+    settings.drone_speed += settings.speed_up
+    settings.drone_s_speed += settings.speed_up
+    settings.points += int(settings.points_earn)
+    settings.speed += settings.speed_up
+    settings.points = int(settings.points)
+    if settings.points in settings.level_up:
+        settings.points_earn *= settings.level_up_scale

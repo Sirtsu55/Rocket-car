@@ -6,8 +6,11 @@ class Stats():
         self.bullets = bullets
         self.drones = drones
         self.settings = settings
-        self.active = True
+        self.active =  False
         self.two_player = False
     def reset(self):
         if self.settings.lives == 0:
-            sys.exit()
+            self.bullets.remove()
+            for drone in self.drones:
+                    self.drones.remove(drone)
+            self.active = False

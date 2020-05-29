@@ -5,8 +5,7 @@ import random
 from bullet import Bullet
 from drone import Drone
 from car import Car
-
-
+from points import PointButton
 
 def collision(bullets, drones, settings, car):
     for bullet in bullets:
@@ -56,8 +55,14 @@ def quit(event):
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_q:
             sys.exit()
+def check_play_button(stats, play_button, mouse_x, mouse_y):
+    if play_button.rect.collidepoint(mouse_x, mouse_y):
+        stats.active = True
+        pygame.mouse.set_visible(False)
 
 def keydown(event, settings, screen ,car,car2, bullets, stats): #keydown events
+
+
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_RIGHT:
             car.moving_right = True
@@ -70,6 +75,7 @@ def keydown(event, settings, screen ,car,car2, bullets, stats): #keydown events
         elif event.key == pygame.K_SPACE:
             #make a new bullet and add it into the bullets Group
             make_bullets(settings, screen, car, bullets)
+
 
         if stats.two_player:
             if event.key == pygame.K_d:
@@ -84,6 +90,7 @@ def keydown(event, settings, screen ,car,car2, bullets, stats): #keydown events
             elif event.key == pygame.K_LALT:
                 #make a new bullet and add it into the bullets Group
                 make_bullets(settings, screen, car2, bullets)
+
 
 
 
@@ -110,22 +117,34 @@ def keyup(event, settings, screen, car, car2, bullets): #key up events
             car2.moving_down = False
 
 
-def check_events(settings, screen ,car, car2 , bullets, stats):
+def check_events(settings, screen ,car, car2 , bullets, stats, play_button):
     for event in pygame.event.get():
         quit(event)
         if event.type == pygame.KEYDOWN:
             keydown(event, settings, screen, car, car2, bullets, stats)
         elif event.type == pygame.KEYUP:
             keyup(event, settings, screen, car, car2, bullets)
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            check_play_button(stats, play_button, mouse_x, mouse_y)
 
-def screen_update(d_settings, screen, car, car2, line, bullets, drones, stats):
+
+def screen_update(d_settings, screen, car, car2, line, bullets, drones, stats, play_button, points):
     screen.fill(d_settings.bg_colour)
-    car.draw()
+    points = PointButton(d_settings, screen, ' HP: '+str(d_settings.lives))
+    points.draw_points()
+    if stats.active == False:
+        car.draw()
+        line.draw_line()
+        play_button.draw_button()
+        pygame.display.flip()
     if stats.two_player:
         car2.draw()
-    line.draw_line()
-    update_drones(drones, d_settings)
-    remove_and_speedup_drone(d_settings, screen, drones)
-    #draw all the bullets on the screen
-    draw_bullets(bullets)
-    pygame.display.flip()
+    if stats.active:
+        car.draw()
+        line.draw_line()
+        update_drones(drones, d_settings)
+        remove_and_speedup_drone(d_settings, screen, drones)
+        #draw all the bullets on the screen
+        draw_bullets(bullets)
+        pygame.display.flip()
