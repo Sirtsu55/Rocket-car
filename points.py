@@ -12,7 +12,7 @@ class PointButton():
         self.width, self.height = 200, 20
         self.b_colour = self.settings.bg_colour
         self.txt_colour = (0,0,0)
-        self.font = pygame.font.SysFont(None, 30)
+        self.font = pygame.font.SysFont('calibri', 30)
         self.rect = pygame.Rect(0,0, self.width, self.height)
         self.rect.top = self.screen_rect.top
         self.rect.left = self.screen_rect.left
@@ -20,7 +20,7 @@ class PointButton():
 
     def show_points(self, points, settings):
         point_num = "{:,}".format(int(settings.points))
-        points = 'points: '+str(point_num) + str(points)
+        points = '          points: '+str(point_num) + str(points)
         self.points_img = self.font.render(str(points), True,self.txt_colour, self.b_colour)
         self.points_rect = self.points_img.get_rect()
         self.points_rect.center = self.rect.center

@@ -11,7 +11,7 @@ class Button():
         self.width, self.height = 200, 50
         self.b_colour = self.settings.bg_colour
         self.txt_colour = (0, 255,0)
-        self.font = pygame.font.SysFont(None, 48)
+        self.font = pygame.font.SysFont('calibri', 48)
         self.rect = pygame.Rect(0,0, self.width, self. height)
         self.rect.center = self.screen_rect.center
         self.show_msg(msg)
